@@ -27,9 +27,9 @@ export default function Header() {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Card style={{ width: '20rem', flexDirection: 'row' }}>
+              <Card style={{ width: '25rem' }}>
                 <Card.Img variant="top" src={Avatar} style={{ width: 60, height: 60, marginTop: 'auto', marginBottom: 'auto' }} />
-                <Card.Body>
+                <Card.Body style={{ display: 'flex', flexDirection: 'column' }}>
                   <Card.Title>Anastasia Kovtun</Card.Title>
                   <Card.Subtitle>firstsunset@gmail.com</Card.Subtitle>
                 </Card.Body>
