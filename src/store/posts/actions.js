@@ -5,6 +5,9 @@ import {
   GET_POST_DETAILS,
   GET_POST_DETAILS_SUCCESS,
   GET_POST_DETAILS_FAIL,
+  GET_COMMENTS,
+  GET_COMMENTS_SUCCESS,
+  GET_COMMENTS_FAIL
 } from "./actionTypes";
 
 export const getPosts = () => {
@@ -44,6 +47,27 @@ export const getPostDetailsSuccess = (post) => {
 export const getPostDetailsFail = (error) => {
   return {
     type: GET_POST_DETAILS_FAIL,
+    payload: error,
+  };
+};
+
+export const getComments = (id) => {
+  return {
+    type: GET_COMMENTS,
+    payload: id,
+  };
+};
+
+export const getCommentsSuccess = (comments) => {
+  return {
+    type: GET_COMMENTS_SUCCESS,
+    payload: comments,
+  };
+};
+
+export const getCommentsFail = (error) => {
+  return {
+    type: GET_COMMENTS_FAIL,
     payload: error,
   };
 };

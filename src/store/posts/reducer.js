@@ -5,6 +5,9 @@ import {
   GET_POST_DETAILS,
   GET_POST_DETAILS_SUCCESS,
   GET_POST_DETAILS_FAIL,
+  GET_COMMENTS_SUCCESS,
+  GET_COMMENTS,
+  GET_COMMENTS_FAIL
 } from "./actionTypes";
 
 const initialState = {
@@ -47,6 +50,21 @@ const PostReducer = (state = initialState, action) => {
           message: "Error",
         },
         loadingPostDetails: false,
+      };
+      break;
+    case GET_COMMENTS:
+      state = { ...state, loadingComments: true };
+      break;
+    case GET_COMMENTS_SUCCESS:
+      state = { ...state, comments: action.payload, loadingComments: false };
+      break;
+    case GET_COMMENTS_FAIL:
+      state = {
+        ...state,
+        error: {
+          message: "Error",
+        },
+        loadingComments: false,
       };
       break;
     default:

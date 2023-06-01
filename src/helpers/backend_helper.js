@@ -11,3 +11,11 @@ export const getPostDetails = (id) =>
       id: id,
     },
  });
+
+//Comments
+export const getComments = (id) =>
+  get(url.GET_POST_COMMENTS, {
+    params: {
+      postId: id,
+    },
+ });
