@@ -7,11 +7,16 @@ import {
   GET_POST_DETAILS_FAIL,
   GET_COMMENTS_SUCCESS,
   GET_COMMENTS,
-  GET_COMMENTS_FAIL
+  GET_COMMENTS_FAIL,
+  GET_CURRENT_PAGE,
 } from "./actionTypes";
 
 const initialState = {
   posts: [],
+  currentPage: 1,
+  perPage: 10,
+  totalCount: 100,
+
   post: {},
   loadingPosts: false,
   loadingPostDetails: false,
@@ -26,7 +31,7 @@ const PostReducer = (state = initialState, action) => {
       state = { ...state, loadingPosts: true };
       break;
     case GET_POSTS_SUCCESS:
-      state = { ...state, posts: action.payload, loadingPosts: false };
+      state = { ...state, posts: action.payload, totalCount: action.payload,  loadingPosts: false };
       break;
     case GET_POSTS_FAIL:
       state = {
@@ -36,6 +41,9 @@ const PostReducer = (state = initialState, action) => {
         },
         loadingPosts: false,
       };
+      break;
+    case GET_CURRENT_PAGE:
+      state = { ...state, currentPage: action.payload };
       break;
     case GET_POST_DETAILS:
       state = { ...state, loadingPostDetails: true };

@@ -22,3 +22,11 @@ export async function get(url, config) {
     })
     .then((response) => response.data);
 }
+
+export async function post(url, config) {
+  return await axiosApi
+    .post(url, {
+      ...config,
+    })
+    .then((response) => response.data);
+}

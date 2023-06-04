@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 
-import { GET_POSTS, GET_POST_DETAILS, GET_COMMENTS } from "./actionTypes";
+import { GET_POSTS, GET_POST_DETAILS, GET_COMMENTS, } from "./actionTypes";
 
 import {
   getPostsSuccess,
@@ -8,7 +8,7 @@ import {
   getPostDetailsSuccess,
   getPostDetailsFail,
   getCommentsSuccess,
-  getCommentsFail
+  getCommentsFail,
 } from "./actions";
 
 import { getPosts, getPostDetails, getComments } from "../../helpers/backend_helper";
@@ -24,7 +24,7 @@ function* onGetPosts() {
 
 function* onGetPostDetails({ payload: id }) {
   try {
-    const response = yield call(getPostDetails, );
+    const response = yield call(getPostDetails, id);
     yield put(getPostDetailsSuccess(response));
   } catch (error) {
     yield put(getPostDetailsFail(error.response));
@@ -40,10 +40,12 @@ function* onGetComments({ payload: id }) {
   }
 }
 
-function* CartSaga() {
+
+
+function* PostSaga() {
   yield takeLatest(GET_POSTS, onGetPosts);
   yield takeLatest(GET_POST_DETAILS, onGetPostDetails);
   yield takeLatest(GET_COMMENTS, onGetComments);
 }
 
-export default CartSaga;
+export default PostSaga;

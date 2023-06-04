@@ -7,7 +7,8 @@ import {
   GET_POST_DETAILS_FAIL,
   GET_COMMENTS,
   GET_COMMENTS_SUCCESS,
-  GET_COMMENTS_FAIL
+  GET_COMMENTS_FAIL,
+  GET_CURRENT_PAGE,
 } from "./actionTypes";
 
 export const getPosts = () => {
@@ -27,6 +28,13 @@ export const getPostsFail = (error) => {
   return {
     type: GET_POSTS_FAIL,
     payload: error,
+  };
+};
+
+export const getCurrentPage = (page) => {
+  return {
+    type: GET_CURRENT_PAGE,
+    payload: page,
   };
 };
 
