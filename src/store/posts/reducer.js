@@ -9,14 +9,18 @@ import {
   GET_COMMENTS,
   GET_COMMENTS_FAIL,
   GET_CURRENT_PAGE,
+  SORT_POST,
+  SORT_POST_SUCCESS,
+  SORT_POST_FAIL,
+  
 } from "./actionTypes";
 
 const initialState = {
   posts: [],
-  currentPage: 1,
-  perPage: 10,
+  currentPage: 0,
+  pageLimit: 10,
   totalCount: 100,
-
+  paginationMode: true,
   post: {},
   loadingPosts: false,
   loadingPostDetails: false,
@@ -31,7 +35,13 @@ const PostReducer = (state = initialState, action) => {
       state = { ...state, loadingPosts: true };
       break;
     case GET_POSTS_SUCCESS:
-      state = { ...state, posts: action.payload, totalCount: action.payload,  loadingPosts: false };
+      state = { 
+        ...state, 
+        posts: action.payload.posts, 
+        currentPage: state.currentPage + action.payload.currentPage,  
+        loadingPosts: false ,
+        paginationMode: false
+      };
       break;
     case GET_POSTS_FAIL:
       state = {
@@ -73,6 +83,21 @@ const PostReducer = (state = initialState, action) => {
           message: "Error",
         },
         loadingComments: false,
+      };
+      break;
+    case SORT_POST:
+      state = { ...state, loadingSortPost: true };
+      break;
+    case SORT_POST_SUCCESS:
+      state = { ...state, posts: action.payload, paginationMode: false, loadingSortPost: false };
+      break;
+    case SORT_POST_FAIL:
+      state = {
+        ...state,
+        error: {
+          message: "Error",
+        },
+        loadingSortPost: false,
       };
       break;
     default:

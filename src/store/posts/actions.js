@@ -9,11 +9,15 @@ import {
   GET_COMMENTS_SUCCESS,
   GET_COMMENTS_FAIL,
   GET_CURRENT_PAGE,
+  SORT_POST,
+  SORT_POST_SUCCESS,
+  SORT_POST_FAIL,
 } from "./actionTypes";
 
-export const getPosts = () => {
+export const getPosts = (pageInfo) => {
   return {
     type: GET_POSTS,
+    payload: pageInfo
   };
 };
 
@@ -76,6 +80,27 @@ export const getCommentsSuccess = (comments) => {
 export const getCommentsFail = (error) => {
   return {
     type: GET_COMMENTS_FAIL,
+    payload: error,
+  };
+};
+
+export const sortPost = (value) => {
+  return {
+    type: SORT_POST,
+    payload: value,
+  };
+};
+
+export const sortPostSuccess = (posts) => {
+  return {
+    type: SORT_POST_SUCCESS,
+    payload: posts,
+  };
+};
+
+export const sortPostFail = (error) => {
+  return {
+    type: SORT_POST_FAIL,
     payload: error,
   };
 };

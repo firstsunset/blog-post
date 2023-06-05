@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 
-import { GET_POSTS, GET_POST_DETAILS, GET_COMMENTS, } from "./actionTypes";
+import { GET_POSTS, GET_POST_DETAILS, GET_COMMENTS, SORT_POST, } from "./actionTypes";
 
 import {
   getPostsSuccess,
@@ -9,14 +9,16 @@ import {
   getPostDetailsFail,
   getCommentsSuccess,
   getCommentsFail,
+  sortPostSuccess,
+  sortPostFail,
 } from "./actions";
 
-import { getPosts, getPostDetails, getComments } from "../../helpers/backend_helper";
+import { getPosts, getPostDetails, getComments, sortPost } from "../../helpers/backend_helper";
 
-function* onGetPosts() {
+function* onGetPosts({ payload: { start, end, currentPage } }) {
   try {
-    const response = yield call(getPosts);
-    yield put(getPostsSuccess(response));
+    const response = yield call(getPosts, start, end);
+    yield put(getPostsSuccess({ posts: response, currentPage }));
   } catch (error) {
     yield put(getPostsFail(error.response));
   }
@@ -40,12 +42,21 @@ function* onGetComments({ payload: id }) {
   }
 }
 
-
+function* onSortPost({ payload: value }) {
+  try {
+    const response = yield call(sortPost, value);
+    yield put(sortPostSuccess(response));
+  } catch (error) {
+    yield put(sortPostFail(error.response));
+  }
+}
 
 function* PostSaga() {
   yield takeLatest(GET_POSTS, onGetPosts);
   yield takeLatest(GET_POST_DETAILS, onGetPostDetails);
   yield takeLatest(GET_COMMENTS, onGetComments);
+  yield takeLatest(SORT_POST, onSortPost);
+
 }
 
 export default PostSaga;
