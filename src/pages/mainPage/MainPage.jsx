@@ -31,10 +31,8 @@ export default function MainPage() {
   const pages = []
   
   createPages(pages, pagesCount, currentPage);
-  console.log(currentPage);
   
   useEffect(() => {
-    console.log(posts);
     dispatch(getPosts({ start: 0, end: 10, currentPage: 0}));
   }, [currentPage])
 
@@ -188,6 +186,7 @@ export default function MainPage() {
                 <PostCard 
                   title={post.userId + post.title} 
                   description={post.body} 
+                  userId={post.userId}
                   handleOpen={() => handleGetComments(post.id)}
                 >
                   <div style={{ height: '19rem', overflowY: 'auto' }}>

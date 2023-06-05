@@ -22,6 +22,7 @@ const initialState = {
   totalCount: 100,
   paginationMode: true,
   post: {},
+  comments: [],
   loadingPosts: false,
   loadingPostDetails: false,
   error: {

@@ -33,3 +33,19 @@ export const sortPost = (value) =>
       _sort: value,
     },
  });
+
+//Users
+export const getUserDetails = (id) =>
+  get(url.GET_USER_DETAILS, {
+    params: {
+      id: id,
+    },
+ });
+
+ //Posts
+export const getUsersPosts = (id) =>
+get(url.GET_USERS_POSTS, {
+  params: {
+    userId: id,
+  },
+});
