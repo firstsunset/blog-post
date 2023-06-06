@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import { Row, Col, Card, Stack } from 'react-bootstrap';
+import { Row, Col, Card, Stack, Button } from 'react-bootstrap';
 import PostCard from '../../components/PostCard';
 import { getUserDetails, getUsersPosts } from '../../store/users/actions';
 import { getComments } from '../../store/posts/actions';
-
-
-
-
 
 export default function UserPage() {
   const dispatch = useDispatch();
@@ -99,6 +95,9 @@ export default function UserPage() {
           })
         }
       </Row>
+      <Link to={'/'} style={{ marginTop: 20, marginBottom: 20 }} >
+        <Button>Back</Button>
+      </Link>
     </Stack>
   );
 }

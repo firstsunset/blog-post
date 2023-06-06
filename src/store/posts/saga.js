@@ -42,9 +42,9 @@ function* onGetComments({ payload: id }) {
   }
 }
 
-function* onSortPost({ payload: value }) {
+function* onSortPost({ payload: { value, start, end } }) {
   try {
-    const response = yield call(sortPost, value);
+    const response = yield call(sortPost, value, start, end);
     yield put(sortPostSuccess(response));
   } catch (error) {
     yield put(sortPostFail(error.response));

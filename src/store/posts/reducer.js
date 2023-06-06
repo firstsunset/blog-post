@@ -20,7 +20,6 @@ const initialState = {
   currentPage: 0,
   pageLimit: 10,
   totalCount: 100,
-  paginationMode: true,
   post: {},
   comments: [],
   loadingPosts: false,
@@ -39,9 +38,8 @@ const PostReducer = (state = initialState, action) => {
       state = { 
         ...state, 
         posts: action.payload.posts, 
-        currentPage: state.currentPage + action.payload.currentPage,  
+        currentPage: action.payload.currentPage,  
         loadingPosts: false ,
-        paginationMode: false
       };
       break;
     case GET_POSTS_FAIL:
@@ -90,7 +88,7 @@ const PostReducer = (state = initialState, action) => {
       state = { ...state, loadingSortPost: true };
       break;
     case SORT_POST_SUCCESS:
-      state = { ...state, posts: action.payload, paginationMode: false, loadingSortPost: false };
+      state = { ...state, posts: action.payload, loadingSortPost: false };
       break;
     case SORT_POST_FAIL:
       state = {

@@ -27,10 +27,12 @@ export const getComments = (id) =>
  });
 
 //Sort
-export const sortPost = (value) =>
+export const sortPost = (value, start, end) =>
   get(url.GET_POSTS, {
     params: {
       _sort: value,
+      _start: start,
+      _end: end
     },
  });
 
