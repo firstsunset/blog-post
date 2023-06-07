@@ -1,7 +1,7 @@
 import {
-  BrowserRouter,
   Routes,
   Route,
+  HashRouter,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -15,7 +15,7 @@ import store from './store';
 function App() {
   return (
     <Provider store={store} >
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route element={<MainLayout />} >
             <Route path="/" element={<MainPage /> } />
@@ -23,7 +23,7 @@ function App() {
             <Route path="/users/:id" element={<UserPage /> } />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 }
