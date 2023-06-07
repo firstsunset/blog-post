@@ -6,13 +6,13 @@ export default function PostCard({ title, description, children, handleOpen, use
 
   return (
     <>
-      <Card style={{ width: '40vw', height: '40rem', alignItems: 'center' }}>
-        <Card.Body style={{ width: '40vw', height: 'auto'}}>
+      <Card md={{ width: '40vw', height: '40rem', alignItems: 'center' }}>
+        <Card.Body style={{ height: '30rem'}}>
           <Link to={`/users/${userId}`} >
             <Card.Img variant="top" src={UserAvatar} style={{ width: 60, height: 60, marginBottom: 20,  }} />
           </Link>
           <Card.Title style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{title}</Card.Title>
-          <Card.Text style={{ height: 120,  }} >{description}</Card.Text>
+          <Card.Text >{description}</Card.Text>
           <DropdownButton title='Comments' onClick={handleOpen}>
             {children}
           </DropdownButton>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import { Row, Col, Card, Pagination, Form, Button, InputGroup, Stack, Spinner } from 'react-bootstrap';
+import { Row, Col, Card, Pagination, Form, Button, InputGroup, Stack, Spinner, Alert } from 'react-bootstrap';
 import PostCard from '../../components/PostCard';
 import { getPosts, getComments, sortPost } from '../../store/posts/actions';
 import { createPages } from '../../utils/pagesCreator';
 import useDebounce from '../../utils/useDebounse';
-
 
 export default function MainPage() {
   const dispatch = useDispatch();
@@ -100,8 +99,21 @@ export default function MainPage() {
       
   return (
     <>
+      {
+        error.message !== '' &&
+        <Alert variant='danger'>
+          Something went wrong
+        </Alert>
+      }
       <h1>Posts</h1>
-      <Stack direction="horizontal" style={{ marginBottom: 30, justifyContent: 'space-between' }} >
+      <Stack 
+        direction="horizontal" 
+        style={{ 
+          marginBottom: 30, 
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 20
+        }} >
         <Form className="d-flex" onSubmit={handleSubmit} style={{ justifyContent: 'space-between' }}>
           <InputGroup style={{ marginRight: 20 }} >
             <Form.Control 
@@ -130,7 +142,7 @@ export default function MainPage() {
       
       <Row xs={1} md={2} className="g-4" style={{ marginBottom: 20 }}  >
         { isLoading ?
-          <Spinner animation="border" variant="primary" />
+          <Spinner animation="border" variant="primary" style={{ margin: 'auto' }} />
           :
           filteredPosts?.map((post) => {
             return (
@@ -141,17 +153,13 @@ export default function MainPage() {
                   userId={post.userId}
                   handleOpen={() => handleGetComments(post.id)}
                 >
-                  {
-                    // isLoading ?
-                    // <Spinner animation="border" variant="primary" />
-                    // :
                     <div style={{ height: '19rem', overflowY: 'auto' }}>
                       {
                         (comments?.length > 0 && comments[0].postId === post.id) &&
                           comments.map((comment, index) => {
                             return(
                               <Card key={index} style={{ border: 'none' }}>
-                                <Card.Body>
+                                <Card.Body style={{ width: '95%'}}>
                                   <Card.Title>{comment.email}</Card.Title>
                                   <Card.Text>{comment.body}</Card.Text>
                                 </Card.Body>
@@ -160,14 +168,13 @@ export default function MainPage() {
                           })
                       }
                     </div>
-                  }
                 </PostCard>
               </Col>
             )
           })
         }
-        { (filteredPosts?.length > 9) &&
-          <Pagination>
+        { (filteredPosts?.length > 9 && !isLoading) &&
+          <Pagination style={{ paddingRight: 0, display: 'flex', justifyContent: 'center', width: '100%' }}>
             {
               pages?.map((page, index) => {
                 return (
